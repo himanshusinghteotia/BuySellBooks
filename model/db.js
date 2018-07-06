@@ -7,17 +7,15 @@ const Sequelize = require('sequelize')
 const op = Sequelize.Op
 
 //Establish connection with database as shopdb
-const db = new Sequelize('shopdb', '', '', {
-    //host: '',
-    //dialect: 'mysql',
-    dialect:'sqlite',
+const db = new Sequelize('sql9246365', 'sql9246365', 'stTumc1t3S', {
+    host: 'sql9.freemysqlhosting.net',
+    dialect: 'mysql',
     operatorsAliases: op,
     pool: {
         min: 0,
         max: 5,
         idle: 5000,
-    },
-    storage: './shopdb.sqlite'
+    }
 })
 console.log('******************************************')
 console.log('Established Database Connection')
