@@ -1,0 +1,33 @@
+{
+  "name": "buysellbooks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "multer": "^1.1.0",
+    "mysql2": "^1.5.3",
+    "sequelize": "^4.38.0",
+    "sweetalert": "^2.1.0",
+    "sqlite3": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Himanshu Singh Teotia",
+  "license": "ISC",
+  "engines": {
+    "node": "8.11.3",
+    "npm": "5.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/himanshusinghteotia/BuySellBooks"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
+}
