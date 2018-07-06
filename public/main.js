@@ -330,12 +330,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _showmsg_showmsg_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./showmsg/showmsg.component */ "./src/app/showmsg/showmsg.component.ts");
 /* harmony import */ var _wishlist_wishlist_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./wishlist/wishlist.component */ "./src/app/wishlist/wishlist.component.ts");
 /* harmony import */ var _searchfilter_pipe__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./searchfilter.pipe */ "./src/app/searchfilter.pipe.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -391,7 +393,7 @@ var AppModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_14__["RouterModule"].forRoot(appRoutes),
             ],
-            providers: [_adduser_service__WEBPACK_IMPORTED_MODULE_5__["AdduserService"], _checkuser_service__WEBPACK_IMPORTED_MODULE_8__["CheckuserService"]],
+            providers: [_adduser_service__WEBPACK_IMPORTED_MODULE_5__["AdduserService"], _checkuser_service__WEBPACK_IMPORTED_MODULE_8__["CheckuserService"], { provide: _angular_common__WEBPACK_IMPORTED_MODULE_18__["LocationStrategy"], useClass: _angular_common__WEBPACK_IMPORTED_MODULE_18__["HashLocationStrategy"] }],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
         })
     ], AppModule);
