@@ -1,0 +1,39 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand">BootCamp 2018</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li>
+          <a routerLink="">Home</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <div class="nav navbar-nav" [hidden]="hidecheck()">
+          <li>
+            <a routerLink="messages">
+              <i class="fa fa-envelope" aria-hidden="true"></i> Messages</a>
+          </li>
+        </div>
+        <div class="nav navbar-nav" [hidden]="hidecheck()">
+          <li>
+            <a routerLink="wishlist">
+              <i class="fa fa-heart" aria-hidden="true"></i> Wishlist</a>
+          </li>
+        </div>
+        <div class="nav navbar-nav" [hidden]="hidecheck()">
+          <li (click)="logout()">
+            <a routerLink="">
+              <span class="glyphicon">&#xe163;</span>Logout</a>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>

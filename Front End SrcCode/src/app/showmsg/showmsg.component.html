@@ -1,0 +1,7 @@
+<div class="alert alert-info" *ngIf="nomsg; else elseBlock">
+  No message</div>
+<ng-template #elseBlock>
+  <div class="alert alert-info" *ngFor="let m of message">
+    <li class="text-center" style="list-style-type:none;">{{m.msg}}</li>
+  </div>
+</ng-template>

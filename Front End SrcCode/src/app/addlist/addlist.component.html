@@ -1,0 +1,24 @@
+<form class="form-signin text-center" #frm="ngForm" (ngSubmit)="addList(frm)">
+  <img class="mb-4" src="http://icons.iconarchive.com/icons/double-j-design/ravenna-3d/128/Book-icon.png" alt="" width="72"
+    height="72">
+  <h1 class="h3 mb-3 font-weight-normal">Add Your Book</h1>
+  <div>
+    <input class="form-control" ngModel name="bkname" type="text" placeholder="Book Name">
+    <input class="form-control" ngModel name="autname" type="text" placeholder="Author Name">
+    <form>
+      <input class="form-control" type="file" (change)="onFileChanged($event)">
+      <button style="color: blue" class="form-control" (click)="onUpload()">Upload!(CLICK ME)</button>
+    </form>
+    <input class="form-control" ngModel name="price" type="number" placeholder="Price">
+    <label style="margin-top: 15px;">Book Condition</label>
+    <select class="form-control" ngModel name="bcond">
+      <option disabled selected>--select--</option>
+      <option value="New">New</option>
+      <option value="Almost New">Almost New</option>
+      <option value="Slight Damage">Slight Damage</option>
+      <option value="Worn">Worn</option>
+    </select>
+    <br>
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Add to the List">
+  </div>
+</form>

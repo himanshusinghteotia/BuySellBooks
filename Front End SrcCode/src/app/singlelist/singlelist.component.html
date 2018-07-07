@@ -1,0 +1,17 @@
+<div class="text-center">
+  <div>
+    <img src={{item?.imgname}} onerror="this.src='/uploads/default.jpeg'" class="product-grid__img"
+    />
+  </div>
+  <div>
+    <span class="text-uppercase font-weight-bold" style="font-family: 'Times New Roman', Times, serif; font-size: 25px;">{{item?.bkname}}</span>
+    <br>
+    <span class="text-capitalize" style="font-family: 'Times New Roman',Times, serif;font-size: 15px;">Author: {{item?.autname}}</span>
+    <br>
+    <span style="font-family: 'Times New Roman', Times, serif; font-size: 25px; ;color: blue;">₹ {{item?.price}}</span>
+    <p style="font-style: italic;">Condition of book is
+      <b>{{item?.cond}}</b>.</p>
+  </div>
+  <button class="btn btn-primary" style="margin-bottom: 30px;margin-left: 10px;margin-right: 10px;" [id]="item?.lid" (click)="addwish($event,item?.userSid)">Add to WishList</button>
+  <button class="btn btn-primary" [id]="item?.lid" (click)="sendmsg(item?.userSid,item?.bkname,item?.lid)" style="margin-bottom: 30px;margin-right: 10px;margin-left: 10px;">Connect to Seller</button>
+</div>

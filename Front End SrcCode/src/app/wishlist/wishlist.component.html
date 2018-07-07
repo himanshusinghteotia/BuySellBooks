@@ -1,0 +1,24 @@
+<div class="alert alert-info" *ngIf="nowish; else elseBlock">
+  No Wishes
+</div>
+<ng-template #elseBlock>
+  <div class="container text-center">
+    <div class="row">
+      <div *ngFor="let w of wish" class="col-md-6 col-sm-5">
+        <div style="cursor: pointer;" (click)="p_detail(w.lid)">
+          <div>
+            <img id="image" src={{w.imgname}} onerror="this.src='/uploads/default.jpeg'" class="product-grid__img"
+            />
+          </div>
+          <span class="text-uppercase font-weight-bold" style="font-family: 'Times New Roman', Times, serif;font-size: 25px;">{{w.bkname}}</span>
+          <br>
+          <span class="text-capitalize" style="font-family: 'Times New Roman', Times, serif;font-size: 15px;">author: {{w.autname}}</span>
+          <br>
+          <span style="font-family: 'Times New Roman', Times, serif;font-size: 25px;color: blue; ">₹{{w.price}}</span>
+          <p style="font-style: italic;margin-bottom: 30px;">Condition of book is
+            <b>{{w.cond}}</b>.
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
