@@ -90,7 +90,7 @@ module.exports = ".form-signin {\r\n  width: 100%;\r\n  max-width: 330px;\r\n  p
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"form-signin text-center\" #frm=\"ngForm\" (ngSubmit)=\"addList(frm)\">\n  <img class=\"mb-4\" src=\"http://icons.iconarchive.com/icons/double-j-design/ravenna-3d/128/Book-icon.png\" alt=\"\" width=\"72\"\n    height=\"72\">\n  <h1 class=\"h3 mb-3 font-weight-normal\">Add Your Book</h1>\n  <div>\n    <input class=\"form-control\" ngModel name=\"bkname\" type=\"text\" placeholder=\"Book Name\">\n    <input class=\"form-control\" ngModel name=\"autname\" type=\"text\" placeholder=\"Author Name\">\n    <form>\n      <input class=\"form-control\" type=\"file\" (change)=\"onFileChanged($event)\">\n      <button class=\"form-control\" (click)=\"onUpload()\">Upload!</button>\n    </form>\n    <input class=\"form-control\" ngModel name=\"price\" type=\"number\" placeholder=\"Price\">\n    <label style=\"margin-top: 15px;\">Book Condition</label>\n    <select class=\"form-control\" ngModel name=\"bcond\">\n      <option disabled selected>--select--</option>\n      <option value=\"New\">New</option>\n      <option value=\"Almost New\">Almost New</option>\n      <option value=\"Slight Damage\">Slight Damage</option>\n      <option value=\"Worn\">Worn</option>\n    </select>\n    <br>\n    <input class=\"btn btn-lg btn-primary btn-block\" type=\"submit\" value=\"Add to the List\">\n  </div>\n</form>"
+module.exports = "<form class=\"form-signin text-center\" #frm=\"ngForm\" (ngSubmit)=\"addList(frm)\">\n  <img class=\"mb-4\" src=\"http://icons.iconarchive.com/icons/double-j-design/ravenna-3d/128/Book-icon.png\" alt=\"\" width=\"72\"\n    height=\"72\">\n  <h1 class=\"h3 mb-3 font-weight-normal\">Add Your Book</h1>\n  <div>\n    <input class=\"form-control\" ngModel name=\"bkname\" type=\"text\" placeholder=\"Book Name\">\n    <input class=\"form-control\" ngModel name=\"autname\" type=\"text\" placeholder=\"Author Name\">\n    <form>\n      <input class=\"form-control\" type=\"file\" (change)=\"onFileChanged($event)\">\n      <button style=\"color: blue\" class=\"form-control\" (click)=\"onUpload()\">Upload!(CLICK ME)</button>\n    </form>\n    <input class=\"form-control\" ngModel name=\"price\" type=\"number\" placeholder=\"Price\">\n    <label style=\"margin-top: 15px;\">Book Condition</label>\n    <select class=\"form-control\" ngModel name=\"bcond\">\n      <option disabled selected>--select--</option>\n      <option value=\"New\">New</option>\n      <option value=\"Almost New\">Almost New</option>\n      <option value=\"Slight Damage\">Slight Damage</option>\n      <option value=\"Worn\">Worn</option>\n    </select>\n    <br>\n    <input class=\"btn btn-lg btn-primary btn-block\" type=\"submit\" value=\"Add to the List\">\n  </div>\n</form>"
 
 /***/ }),
 
@@ -132,23 +132,28 @@ var AddlistComponent = /** @class */ (function () {
      */
     AddlistComponent.prototype.addList = function (frm) {
         var obj = JSON.parse(localStorage.getItem("user"));
-        var list = {
-            bkname: frm.value.bkname,
-            autname: frm.value.autname,
-            imgname: this.imagename,
-            price: frm.value.price,
-            cond: frm.value.bcond,
-            userSid: parseInt(obj.sid)
-        };
-        //service to add book details
-        this.addlistservice.addlist(list).subscribe(function (success) {
-            sweetalert__WEBPACK_IMPORTED_MODULE_3___default()({
-                title: "Book Added For Sale.",
-                icon: "success"
+        if (frm.value.cond == "--select--") {
+            sweetalert__WEBPACK_IMPORTED_MODULE_3___default()("Error!", "Need to fill all the fields.", "error");
+        }
+        else {
+            var list = {
+                bkname: frm.value.bkname,
+                autname: frm.value.autname,
+                imgname: this.imagename,
+                price: frm.value.price,
+                cond: frm.value.bcond,
+                userSid: parseInt(obj.sid)
+            };
+            //service to add book details
+            this.addlistservice.addlist(list).subscribe(function (success) {
+                sweetalert__WEBPACK_IMPORTED_MODULE_3___default()({
+                    title: "Book Added For Sale.",
+                    icon: "success"
+                });
+            }, function (error) {
+                sweetalert__WEBPACK_IMPORTED_MODULE_3___default()("Error!", error.error, "error");
             });
-        }, function (error) {
-            sweetalert__WEBPACK_IMPORTED_MODULE_3___default()("Error!", error.error, "error");
-        });
+        }
     };
     /*
       function to check to file upload change
@@ -674,7 +679,7 @@ module.exports = "#image{\r\n    width: auto;\r\n    height: 150px;\r\n    margi
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-inline\">\n\t<div class=\"text-center\">\n\t\t<Label>Filters&nbsp;&nbsp;</Label>\n\t\t<input class=\"form-control\" type=\"text\" [(ngModel)]=\"searchText1\" name=\"searchText1\" placeholder=\"Search By BookName\">&nbsp;&nbsp;\n\t\t<input class=\"form-control\" type=\"text\" [(ngModel)]=\"searchText2\" name=\"searchText2\" placeholder=\"Search By AuthorName\">&nbsp;&nbsp;\n\t\t<input class=\"form-control\" type=\"number\" [(ngModel)]=\"searchText3\" name=\"searchText3\" placeholder=\"Filter by Price(Enter Max)\">&nbsp;&nbsp;\n\t\t<label style=\"margin: auto\">Select Condition:</label>\n\t\t<select class=\"form-control\" [(ngModel)]=\"cnd\">&nbsp;&nbsp;\n\t\t\t<option disabled>--select--</option>\n\t\t\t<option value=\"All\">All</option>\n\t\t\t<option value=\"New\">New</option>\n\t\t\t<option value=\"Almost New\">Almost New</option>\n\t\t\t<option value=\"Slight Damage\">Slight Damage</option>\n\t\t\t<option value=\"Worn\">Worn</option>\n\t\t</select>\n\t</div>\n\t<div class=\"text-right\" style=\"margin: 20px;\">\n\t\t<button class=\"btn btn-primary\" routerLink=\"add\">ADD YOUR BOOKS FOR SALE</button>\n\t</div>\n</div>\n<div class=\"container text-center\">\n\t<div class=\"row\">\n\t\t<div class=\"col-md-5 col-sm-5\" *ngFor=\"let i of (item | searchbook: searchText1 | searchauthor: searchText2 | filterbyprice: searchText3 | filterbycondition: cnd )\">\n\t\t\t<div style=\"cursor:pointer; \" (click)=\"p_detail(i.lid)\">\n\t\t\t\t<div>\n\t\t\t\t\t<img id=\"image\" src={{i.imgname}} alt=\"NoImage\" />\n\t\t\t\t</div>\n\t\t\t\t<div>\n\t\t\t\t\t<span class=\"text-uppercase font-weight-bold\" style=\"font-family: 'Times New Roman', Times, serif; font-size: 25px;\">{{i.bkname}}</span>\n\t\t\t\t\t<br>\n\t\t\t\t\t<span class=\"text-capitalize\" style=\"font-family: 'Times New Roman',Times, serif;font-size: 15px;\">Author: {{i.autname}}</span>\n\t\t\t\t\t<br>\n\t\t\t\t\t<span style=\"font-family: 'Times New Roman', Times, serif; font-size: 25px; ;color: blue;\">₹ {{i.price}}</span>\n\t\t\t\t\t<p style=\"font-style: italic;\">Condition of book is\n\t\t\t\t\t\t<b>{{i.cond}}</b>.</p>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<button class=\"btn btn-primary\" style=\"margin-bottom: 30px;\" [id]=\"i.lid\" (click)=\"addwish($event,i.userSid)\">Add to WishList</button>\n\t\t</div>\n\t</div>\n</div>"
+module.exports = "<div class=\"form-inline\">\n\t<div class=\"text-center\">\n\t\t<Label>Filters&nbsp;&nbsp;</Label>\n\t\t<input class=\"form-control\" type=\"text\" [(ngModel)]=\"searchText1\" name=\"searchText1\" placeholder=\"Search By BookName\">&nbsp;&nbsp;\n\t\t<input class=\"form-control\" type=\"text\" [(ngModel)]=\"searchText2\" name=\"searchText2\" placeholder=\"Search By AuthorName\">&nbsp;&nbsp;\n\t\t<input class=\"form-control\" type=\"number\" [(ngModel)]=\"searchText3\" name=\"searchText3\" placeholder=\"Filter by Price(Enter Max)\">&nbsp;&nbsp;\n\t\t<label style=\"margin: auto\">Select Condition:</label>\n\t\t<select class=\"form-control\" [(ngModel)]=\"cnd\">&nbsp;&nbsp;\n\t\t\t<option disabled>--select--</option>\n\t\t\t<option value=\"All\">All</option>\n\t\t\t<option value=\"New\">New</option>\n\t\t\t<option value=\"Almost New\">Almost New</option>\n\t\t\t<option value=\"Slight Damage\">Slight Damage</option>\n\t\t\t<option value=\"Worn\">Worn</option>\n\t\t</select>\n\t</div>\n\t<div class=\"text-right\" style=\"margin: 20px;\">\n\t\t<button class=\"btn btn-primary\" routerLink=\"add\">ADD YOUR BOOKS FOR SALE</button>\n\t</div>\n</div>\n<div class=\"container text-center\">\n\t<div class=\"row\">\n\t\t<div class=\"col-md-5 col-sm-5\" *ngFor=\"let i of (item | searchbook: searchText1 | searchauthor: searchText2 | filterbyprice: searchText3 | filterbycondition: cnd )\">\n\t\t\t<div style=\"cursor:pointer; \" (click)=\"p_detail(i.lid)\">\n\t\t\t\t<div>\n\t\t\t\t\t<img id=\"image\" src={{i.imgname}} onerror=\"this.src='/uploads/default.jpeg'\" />\n\t\t\t\t</div>\n\t\t\t\t<div>\n\t\t\t\t\t<span class=\"text-uppercase font-weight-bold\" style=\"font-family: 'Times New Roman', Times, serif; font-size: 25px;\">{{i.bkname}}</span>\n\t\t\t\t\t<br>\n\t\t\t\t\t<span class=\"text-capitalize\" style=\"font-family: 'Times New Roman',Times, serif;font-size: 15px;\">Author: {{i.autname}}</span>\n\t\t\t\t\t<br>\n\t\t\t\t\t<span style=\"font-family: 'Times New Roman', Times, serif; font-size: 25px; ;color: blue;\">₹ {{i.price}}</span>\n\t\t\t\t\t<p style=\"font-style: italic;\">Condition of book is\n\t\t\t\t\t\t<b>{{i.cond}}</b>.</p>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t\t<button class=\"btn btn-primary\" style=\"margin-bottom: 30px;\" [id]=\"i.lid\" (click)=\"addwish($event,i.userSid)\">Add to WishList</button>\n\t\t</div>\n\t</div>\n</div>"
 
 /***/ }),
 
@@ -1257,7 +1262,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"text-center\">\n  <div>\n    <img src={{item?.imgname}} alt=\"NoImage\" class=\"product-grid__img\"\n    />\n  </div>\n  <div>\n    <span class=\"text-uppercase font-weight-bold\" style=\"font-family: 'Times New Roman', Times, serif; font-size: 25px;\">{{item?.bkname}}</span>\n    <br>\n    <span class=\"text-capitalize\" style=\"font-family: 'Times New Roman',Times, serif;font-size: 15px;\">Author: {{item?.autname}}</span>\n    <br>\n    <span style=\"font-family: 'Times New Roman', Times, serif; font-size: 25px; ;color: blue;\">₹ {{item?.price}}</span>\n    <p style=\"font-style: italic;\">Condition of book is\n      <b>{{item?.cond}}</b>.</p>\n  </div>\n  <button class=\"btn btn-primary\" style=\"margin-bottom: 30px;margin-left: 10px;margin-right: 10px;\" [id]=\"item?.lid\" (click)=\"addwish($event,item?.userSid)\">Add to WishList</button>\n  <button class=\"btn btn-primary\" [id]=\"item?.lid\" (click)=\"sendmsg(item?.userSid,item?.bkname,item?.lid)\" style=\"margin-bottom: 30px;margin-right: 10px;margin-left: 10px;\">Connect to Seller</button>\n</div>"
+module.exports = "<div class=\"text-center\">\n  <div>\n    <img src={{item?.imgname}} onerror=\"this.src='/uploads/default.jpeg'\" class=\"product-grid__img\"\n    />\n  </div>\n  <div>\n    <span class=\"text-uppercase font-weight-bold\" style=\"font-family: 'Times New Roman', Times, serif; font-size: 25px;\">{{item?.bkname}}</span>\n    <br>\n    <span class=\"text-capitalize\" style=\"font-family: 'Times New Roman',Times, serif;font-size: 15px;\">Author: {{item?.autname}}</span>\n    <br>\n    <span style=\"font-family: 'Times New Roman', Times, serif; font-size: 25px; ;color: blue;\">₹ {{item?.price}}</span>\n    <p style=\"font-style: italic;\">Condition of book is\n      <b>{{item?.cond}}</b>.</p>\n  </div>\n  <button class=\"btn btn-primary\" style=\"margin-bottom: 30px;margin-left: 10px;margin-right: 10px;\" [id]=\"item?.lid\" (click)=\"addwish($event,item?.userSid)\">Add to WishList</button>\n  <button class=\"btn btn-primary\" [id]=\"item?.lid\" (click)=\"sendmsg(item?.userSid,item?.bkname,item?.lid)\" style=\"margin-bottom: 30px;margin-right: 10px;margin-left: 10px;\">Connect to Seller</button>\n</div>"
 
 /***/ }),
 
@@ -1442,7 +1447,7 @@ module.exports = "#image{\r\n    width: auto;\r\n    height: 150px;\r\n    margi
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"alert alert-info\" *ngIf=\"nowish; else elseBlock\">\n  No Wishes\n</div>\n<ng-template #elseBlock>\n  <div class=\"container text-center\">\n    <div class=\"row\">\n      <div *ngFor=\"let w of wish\" class=\"col-md-6 col-sm-5\">\n        <div style=\"cursor: pointer;\" (click)=\"p_detail(w.lid)\">\n          <div>\n            <img id=\"image\" src={{w.imgname}} alt=\"NoImage\" class=\"product-grid__img\"\n            />\n          </div>\n          <span class=\"text-uppercase font-weight-bold\" style=\"font-family: 'Times New Roman', Times, serif;font-size: 25px;\">{{w.bkname}}</span>\n          <br>\n          <span class=\"text-capitalize\" style=\"font-family: 'Times New Roman', Times, serif;font-size: 15px;\">author: {{w.autname}}</span>\n          <br>\n          <span style=\"font-family: 'Times New Roman', Times, serif;font-size: 25px;color: blue; \">₹{{w.price}}</span>\n          <p style=\"font-style: italic;margin-bottom: 30px;\">Condition of book is\n            <b>{{w.cond}}</b>.\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-template>"
+module.exports = "<div class=\"alert alert-info\" *ngIf=\"nowish; else elseBlock\">\n  No Wishes\n</div>\n<ng-template #elseBlock>\n  <div class=\"container text-center\">\n    <div class=\"row\">\n      <div *ngFor=\"let w of wish\" class=\"col-md-6 col-sm-5\">\n        <div style=\"cursor: pointer;\" (click)=\"p_detail(w.lid)\">\n          <div>\n            <img id=\"image\" src={{w.imgname}} onerror=\"this.src='/uploads/default.jpeg'\" class=\"product-grid__img\"\n            />\n          </div>\n          <span class=\"text-uppercase font-weight-bold\" style=\"font-family: 'Times New Roman', Times, serif;font-size: 25px;\">{{w.bkname}}</span>\n          <br>\n          <span class=\"text-capitalize\" style=\"font-family: 'Times New Roman', Times, serif;font-size: 15px;\">author: {{w.autname}}</span>\n          <br>\n          <span style=\"font-family: 'Times New Roman', Times, serif;font-size: 25px;color: blue; \">₹{{w.price}}</span>\n          <p style=\"font-style: italic;margin-bottom: 30px;\">Condition of book is\n            <b>{{w.cond}}</b>.\n        </div>\n      </div>\n    </div>\n  </div>\n</ng-template>"
 
 /***/ }),
 
