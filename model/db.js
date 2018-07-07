@@ -7,7 +7,7 @@ const Sequelize = require('sequelize')
 const op = Sequelize.Op
 
 //Establish connection with database as shopdb
-const db = new Sequelize('sql9246365', 'sql9246365', 'stTumc1t3S', {
+const db = new Sequelize('sql9246446', 'sql9246446', 'GYXl7GMAF9', {
     host: 'sql9.freemysqlhosting.net',
     dialect: 'mysql',
     operatorsAliases: op,
