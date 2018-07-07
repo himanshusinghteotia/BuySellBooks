@@ -35,5 +35,5 @@ app.use('/upload', require('./route/api/upload.js'))
 
 //port number to listen
 app.listen(process.env.PORT || 2000, function () {
-    console.log("Server started at http://localhost:2000")
+    console.log('Server started at http://localhost:2000')
 })
